@@ -1,0 +1,235 @@
+/* ============================================================
+   ZAYDUN — ANIMASI & TRANSISI GLOBAL
+   Subtle & professional. MPA (multi-page) friendly.
+   ============================================================ */
+
+/* ---------- 1. VIEW TRANSITIONS (pindah halaman) ---------- */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: z-vt-old 0.28s ease-in forwards;
+}
+
+::view-transition-new(root) {
+    animation: z-vt-new 0.35s ease-out;
+}
+
+@keyframes z-vt-old {
+    from { opacity: 1; }
+    to   { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes z-vt-new {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 2. ENTRANCE SAAT HALAMAN DIMUAT ---------- */
+.z-animate-in {
+    opacity: 0;
+    animation: z-fade-up 0.45s ease-out forwards;
+}
+
+@keyframes z-fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 3. SCROLL REVEAL ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger otomatis antar elemen sejajar di dalam grid/list.
+   Hanya opacity yang dianimasikan agar tidak menimpa transisi
+   hover milik elemen (transform/transition Tailwind tetap utuh). */
+.reveal > * {
+    opacity: 0;
+}
+
+.reveal.revealed > * {
+    animation: z-child-fade 0.55s ease forwards;
+}
+
+.reveal.revealed > *:nth-child(1) { animation-delay: 0.05s; }
+.reveal.revealed > *:nth-child(2) { animation-delay: 0.12s; }
+.reveal.revealed > *:nth-child(3) { animation-delay: 0.19s; }
+.reveal.revealed > *:nth-child(4) { animation-delay: 0.26s; }
+.reveal.revealed > *:nth-child(5) { animation-delay: 0.33s; }
+.reveal.revealed > *:nth-child(6) { animation-delay: 0.40s; }
+.reveal.revealed > *:nth-child(n+7) { animation-delay: 0.47s; }
+
+@keyframes z-child-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ---------- 4. MICRO-INTERACTION HOVER ---------- */
+/* Kartu terangkat + shadow lembut */
+.z-card {
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.z-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px -14px rgba(15, 23, 42, 0.18);
+}
+
+/* Gambar membesar saat kartu/group di-hover */
+.z-img-zoom {
+    transition: transform 0.5s ease;
+}
+
+.group:hover .z-img-zoom,
+a:hover .z-img-zoom {
+    transform: scale(1.06);
+}
+
+/* Tombol: scale halus + kilau melintas */
+.z-btn {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.z-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 26px -10px rgba(15, 23, 42, 0.25);
+}
+
+.z-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.55s ease;
+}
+
+.z-btn:hover::after {
+    left: 130%;
+}
+
+/* Link navbar: garis bawah swipe */
+.z-nav-link {
+    position: relative;
+}
+
+.z-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s ease;
+}
+
+.z-nav-link:hover::after,
+.z-nav-link.z-active::after {
+    transform: scaleX(1);
+}
+
+/* Ikon (emoji) di dalam elemen yang di-hover */
+.z-icon-hover {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.group:hover .z-icon-hover,
+a:hover .z-icon-hover,
+button:hover .z-icon-hover {
+    transform: scale(1.15) translateY(-2px);
+}
+
+/* Tombol sosial media */
+.z-social {
+    transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.z-social:hover {
+    transform: translateY(-4px) rotate(-4deg) scale(1.08);
+}
+
+/* Item dropdown: slide halus saat hover */
+.z-dropdown-item {
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.z-dropdown-item:hover {
+    transform: translateX(4px);
+}
+
+/* Tombol WA melayang: denyut lembut */
+.z-float-wa {
+    animation: z-wa-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes z-wa-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+    50%      { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+}
+
+/* ---------- 5. PROGRESS BAR LOADING ---------- */
+#z-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, #0ea5e9, #10b981, #34d399);
+    z-index: 9999;
+    border-radius: 0 2px 2px 0;
+    transition: width 0.2s ease, opacity 0.35s ease;
+    opacity: 0;
+}
+
+#z-progress.z-progress-active {
+    opacity: 1;
+}
+
+/* ---------- 6. AKSESIBILITAS ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .z-animate-in,
+    .reveal,
+    .reveal > * {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .z-card,
+    .z-img-zoom,
+    .z-btn,
+    .z-nav-link,
+    .z-icon-hover,
+    .z-social,
+    .z-dropdown-item,
+    .z-float-wa {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+
+    #z-progress {
+        display: none !important;
+    }
+}

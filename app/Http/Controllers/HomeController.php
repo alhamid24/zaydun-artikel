@@ -19,15 +19,7 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        $productsFish = Product::with('category')
-            ->whereHas('category', function($q) {
-                $q->where('slug', 'ikan-cupang');
-            })
-            ->latest()
-            ->take(3)
-            ->get();
-
-        // 2. Artikel & Produk khusus TUMBUH-TUMBUHAN (Mencakup 'tumbuhan' atau 'tumbuh-tumbuhan')
+        // 2. Artikel khusus TUMBUH-TUMBUHAN (Mencakup 'tumbuhan' atau 'tumbuh-tumbuhan')
         $articlesPlant = Article::with('category')
             ->whereHas('category', function($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
@@ -36,17 +28,34 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        $productsPlant = Product::with('category')
+        // 3. Produk BEST SELLER IKAN (paling banyak dilihat, tie-break rating)
+        $bestSellerFish = Product::with(['category', 'reviews'])
+            ->whereHas('category', function($q) {
+                $q->where('slug', 'ikan-cupang');
+            })
+            ->get()
+            ->sortByDesc(function ($product) {
+                return [$product->views, $product->averageRating()];
+            })
+            ->take(3)
+            ->values();
+
+        // 4. Produk BEST SELLER TUMBUH-TUMBUHAN
+        $bestSellerPlant = Product::with(['category', 'reviews'])
             ->whereHas('category', function($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
             })
-            ->latest()
+            ->get()
+            ->sortByDesc(function ($product) {
+                return [$product->views, $product->averageRating()];
+            })
             ->take(3)
-            ->get();
+            ->values();
 
         return view('home', compact(
-            'articlesFish', 'productsFish',
-            'articlesPlant', 'productsPlant'
+            'articlesFish',
+            'articlesPlant',
+            'bestSellerFish', 'bestSellerPlant'
         ));
     }
 

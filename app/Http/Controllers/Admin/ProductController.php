@@ -31,6 +31,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|numeric',
+            'stock' => 'required|integer|min:0',
             'whatsapp_number' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -45,6 +46,7 @@ class ProductController extends Controller
             'slug' => Str::slug($request->name),
             'category_id' => $request->category_id,
             'price' => $request->price,
+            'stock' => $request->stock,
             'whatsapp_number' => $request->whatsapp_number,
             'description' => $request->description,
             'image' => $imageName,
@@ -64,5 +66,18 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect('admin/products')->with('success', 'Produk berhasil dihapus!');
+    }
+
+    // 5. Update Stok Produk
+    public function updateStock(Request $request, $id)
+    {
+        $request->validate([
+            'stock' => 'required|integer|min:0',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update(['stock' => $request->stock]);
+
+        return redirect('admin/products')->with('success', 'Stok "'.$product->name.'" berhasil diperbarui menjadi '.$request->stock.'!');
     }
 }

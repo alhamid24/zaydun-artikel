@@ -38,6 +38,41 @@
         </div>
     </div>
 
+    <!-- STOK PRODUK (PIE CHART) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-200">
+                <h2 class="font-bold text-gray-900">🐟 Stok Produk Ikan</h2>
+                <p class="text-xs text-gray-500 mt-0.5">Sisa stok per produk ikan</p>
+            </div>
+            <div class="p-5">
+                @if($stockFish->isNotEmpty())
+                    <div class="h-72">
+                        <canvas id="chartStockFish"></canvas>
+                    </div>
+                @else
+                    <div class="h-72 flex items-center justify-center text-gray-400 text-sm">Belum ada data stok produk ikan.</div>
+                @endif
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-200">
+                <h2 class="font-bold text-gray-900">🌱 Stok Produk Tumbuhan</h2>
+                <p class="text-xs text-gray-500 mt-0.5">Sisa stok per produk tumbuhan</p>
+            </div>
+            <div class="p-5">
+                @if($stockPlant->isNotEmpty())
+                    <div class="h-72">
+                        <canvas id="chartStockPlant"></canvas>
+                    </div>
+                @else
+                    <div class="h-72 flex items-center justify-center text-gray-400 text-sm">Belum ada data stok produk tumbuhan.</div>
+                @endif
+            </div>
+        </div>
+    </div>
+
     <!-- STATISTIK PEMBACA ARTIKEL -->
     <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
         <div class="p-5 border-b border-gray-200">
@@ -116,4 +151,62 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+    (function () {
+        if (typeof Chart === "undefined") return;
+
+        var fishPalette = ['#06b6d4', '#3b82f6', '#38bdf8', '#14b8a6', '#818cf8', '#22d3ee', '#0ea5e9', '#0284c7'];
+        var plantPalette = ['#10b981', '#22c55e', '#a3e635', '#14b8a6', '#16a34a', '#34d399', '#65a30d', '#047857'];
+
+        function buildColors(palette, count) {
+            return Array.from({ length: count }, function (_, i) {
+                return palette[i % palette.length];
+            });
+        }
+
+        function makePie(ctxId, labels, values, palette) {
+            var ctx = document.getElementById(ctxId);
+            if (!ctx) return;
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: buildColors(palette, values.length),
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, padding: 14, font: { size: 12 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (ctx) {
+                                    return ' ' + ctx.label + ': ' + ctx.raw + ' pcs';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        @if($stockFish->isNotEmpty())
+        makePie('chartStockFish', @json($stockFish->pluck('name')), @json($stockFish->pluck('stock')->map(function ($s) { return (int) $s; })), fishPalette);
+        @endif
+
+        @if($stockPlant->isNotEmpty())
+        makePie('chartStockPlant', @json($stockPlant->pluck('name')), @json($stockPlant->pluck('stock')->map(function ($s) { return (int) $s; })), plantPalette);
+        @endif
+    })();
+</script>
 @endsection

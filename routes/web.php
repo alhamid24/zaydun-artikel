@@ -31,8 +31,11 @@ Route::get('/artikel', [PublicArtikelController::class, 'index'])->name('artikel
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/produk/ikan', [ProductController::class, 'indexIkan'])->name('products.ikan');
+Route::get('/produk/tumbuhan', [ProductController::class, 'indexTumbuhan'])->name('products.tumbuhan');
 Route::get('/produk/{slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/produk/{slug}/pesan', [ProductController::class, 'order'])->name('products.order');
+Route::post('/produk/{slug}/ulasan', [ProductController::class, 'review'])->name('products.review');
 
 // 2. RUTE ADMIN (Perlu Login)
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -49,6 +52,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/products', [AdminProductController::class, 'index']);
     Route::get('/products/create', [AdminProductController::class, 'create']);
     Route::post('/products', [AdminProductController::class, 'store']);
+    Route::patch('/products/{id}/stock', [AdminProductController::class, 'updateStock'])->name('products.updateStock');
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
     // Rute Profil Pemilik

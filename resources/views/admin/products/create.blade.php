@@ -42,6 +42,12 @@
                 <label class="block text-gray-700 text-sm font-semibold mb-2">Harga (Rp)</label>
                 <input type="number" name="price" value="{{ old('price') }}" placeholder="Contoh: 35000" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
             </div>
+
+            <div>
+                <label class="block text-gray-700 text-sm font-semibold mb-2">Stok</label>
+                <input type="number" name="stock" value="{{ old('stock', 0) }}" min="0" placeholder="Contoh: 10" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
+                <p class="text-xs text-gray-400 mt-1">Jumlah sisa stok produk.</p>
+            </div>
         </div>
 
         <div>

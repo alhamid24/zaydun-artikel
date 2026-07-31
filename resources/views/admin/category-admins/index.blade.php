@@ -34,7 +34,7 @@
                         <tr class="border-b border-gray-100">
                             <td class="py-3 pr-4">
                                 @if($admin->photo)
-                                    <img src="{{ asset('uploads/admins/'.$admin->photo) }}" alt="{{ $admin->name }}" class="w-10 h-10 object-cover rounded-full">
+                                    <img loading="lazy" decoding="async" src="{{ asset('uploads/admins/'.$admin->photo) }}" alt="{{ $admin->name }}" class="w-10 h-10 object-cover rounded-full">
                                 @else
                                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-sm text-white font-bold">
                                         {{ substr($admin->name, 0, 1) }}

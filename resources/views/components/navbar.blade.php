@@ -34,11 +34,11 @@
     $t = $themes[$theme] ?? $themes['netral'];
 @endphp
 
-<header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50" x-data="{ mobileOpen: false, dropdownOpen: false }">
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50" x-data="{ mobileOpen: false, dropdownOpen: false, produkOpen: false }">
     <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center gap-4">
 
         {{-- LOGO --}}
-        <a href="{{ route('home') }}" class="text-2xl font-extrabold tracking-wider {{ $t['logo'] }} shrink-0">
+        <a href="{{ route('home') }}" class="text-2xl font-extrabold tracking-wider {{ $t['logo'] }} shrink-0 transition-transform duration-300 hover:scale-105">
             Zaydun
         </a>
 
@@ -64,7 +64,7 @@
         <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-600">
 
             {{-- Beranda --}}
-            <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? $t['active'] : $t['hover'] }} transition">
+            <a href="{{ route('home') }}" class="z-nav-link {{ request()->routeIs('home') ? $t['active'] . ' z-active' : $t['hover'] }} transition">
                 Beranda
             </a>
 
@@ -72,7 +72,7 @@
             <div class="relative" @click.away="dropdownOpen = false">
                 <button
                     @click="dropdownOpen = !dropdownOpen"
-                    class="flex items-center gap-1 {{ $t['hover'] }} transition focus:outline-none"
+                    class="z-nav-link flex items-center gap-1 {{ $t['hover'] }} transition focus:outline-none"
                 >
                     Kategori
                     <svg class="w-4 h-4 transition-transform" :class="dropdownOpen && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,27 +91,59 @@
                     class="absolute left-0 mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 p-2 space-y-1"
                     style="display: none;"
                 >
-                    <a href="{{ route('kategori.ikan') }}" class="flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
+                    <a href="{{ route('kategori.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
                         <span class="text-base">🐟</span> Ikan
                     </a>
-                    <a href="{{ route('kategori.tumbuhan') }}" class="flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition">
+                    <a href="{{ route('kategori.tumbuhan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition">
                         <span class="text-base">🌱</span> Tumbuhan
                     </a>
                 </div>
             </div>
 
+            {{-- Produk Dropdown --}}
+            <div class="relative" @click.away="produkOpen = false">
+                <button
+                    @click="produkOpen = !produkOpen"
+                    class="z-nav-link flex items-center gap-1 {{ $t['hover'] }} transition focus:outline-none"
+                >
+                    Produk
+                    <svg class="w-4 h-4 transition-transform" :class="produkOpen && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+
+                <div
+                    x-show="produkOpen"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 translate-y-1"
+                    class="absolute left-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 p-2 space-y-1"
+                    style="display: none;"
+                >
+                    <a href="{{ route('products.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
+                        <span class="text-base">🐟</span> Produk Ikan
+                    </a>
+                    <a href="{{ route('products.tumbuhan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition">
+                        <span class="text-base">🌱</span> Produk Tumbuhan
+                    </a>
+                </div>
+            </div>
+
             {{-- Artikel Terbaru --}}
-            <a href="{{ route('artikel.index') }}" class="{{ request()->routeIs('artikel.index') ? $t['active'] : $t['hover'] }} transition">
+            <a href="{{ route('artikel.index') }}" class="z-nav-link {{ request()->routeIs('artikel.index') ? $t['active'] . ' z-active' : $t['hover'] }} transition">
                 Artikel
             </a>
 
             {{-- Tentang Kami --}}
-            <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? $t['active'] : $t['hover'] }} transition">
+            <a href="{{ route('tentang') }}" class="z-nav-link {{ request()->routeIs('tentang') ? $t['active'] . ' z-active' : $t['hover'] }} transition">
                 Tentang Kami
             </a>
 
             {{-- Kontak --}}
-            <a href="{{ route('kontak') }}" class="{{ request()->routeIs('kontak') ? $t['active'] : $t['hover'] }} transition">
+            <a href="{{ route('kontak') }}" class="z-nav-link {{ request()->routeIs('kontak') ? $t['active'] . ' z-active' : $t['hover'] }} transition">
                 Kontak
             </a>
         </nav>
@@ -171,6 +203,14 @@
 
         <a href="{{ route('kategori.tumbuhan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('kategori.tumbuhan') ? 'text-emerald-600 font-bold bg-emerald-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
             🌱 Tumbuhan
+        </a>
+
+        <a href="{{ route('products.ikan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('products.ikan') ? 'text-cyan-600 font-bold bg-cyan-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
+            🐟 Produk Ikan
+        </a>
+
+        <a href="{{ route('products.tumbuhan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('products.tumbuhan') ? 'text-emerald-600 font-bold bg-emerald-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
+            🌱 Produk Tumbuhan
         </a>
 
         <a href="{{ route('artikel.index') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('artikel.index') ? $t['active'] . ' bg-slate-50' : 'text-slate-600 hover:bg-slate-50' }} transition">

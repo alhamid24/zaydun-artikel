@@ -53,7 +53,7 @@
             <label class="block text-gray-700 text-sm font-semibold mb-2">Foto Admin</label>
             @if($admin->photo)
                 <div class="mb-3">
-                    <img src="{{ asset('uploads/admins/'.$admin->photo) }}" alt="{{ $admin->name }}" class="w-28 h-28 object-cover rounded-2xl border border-gray-200">
+                    <img decoding="async" src="{{ asset('uploads/admins/'.$admin->photo) }}" alt="{{ $admin->name }}" class="w-28 h-28 object-cover rounded-2xl border border-gray-200">
                     <p class="text-xs text-gray-400 mt-1">Foto saat ini. Upload foto baru untuk mengganti.</p>
                 </div>
             @endif
