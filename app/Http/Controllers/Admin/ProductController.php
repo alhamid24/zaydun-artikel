@@ -55,7 +55,54 @@ class ProductController extends Controller
         return redirect('admin/products')->with('success', 'Produk berhasil ditambahkan!');
     }
 
-    // 4. Hapus Produk
+    // 4. Tampilkan Form Edit Produk
+    public function edit($id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
+    }
+
+    // 5. Simpan Perubahan Produk
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'category_id' => 'required',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer|min:0',
+            'whatsapp_number' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $data = [
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'whatsapp_number' => $request->whatsapp_number,
+            'description' => $request->description,
+        ];
+
+        // Jika foto diganti, upload yang baru lalu hapus yang lama
+        if ($request->hasFile('image')) {
+            if (file_exists(public_path('uploads/products/'.$product->image))) {
+                unlink(public_path('uploads/products/'.$product->image));
+            }
+            $imageName = time().'_product.'.$request->image->extension();
+            $request->image->move(public_path('uploads/products'), $imageName);
+            $data['image'] = $imageName;
+        }
+
+        $product->update($data);
+
+        return redirect('admin/products')->with('success', 'Produk "'.$product->name.'" berhasil diperbarui!');
+    }
+
+    // 6. Hapus Produk
     public function destroy($id)
     {
         $product = Product::findOrFail($id);

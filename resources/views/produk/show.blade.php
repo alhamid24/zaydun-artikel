@@ -173,6 +173,19 @@
                             @if($review->review)
                                 <p class="mt-3 text-sm text-slate-600 leading-relaxed">{{ $review->review }}</p>
                             @endif
+
+                            @if($review->reply)
+                                <div class="mt-4 bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-black">🛡</div>
+                                        <span class="text-xs font-bold text-emerald-700 uppercase tracking-wide">Zaydun</span>
+                                    </div>
+                                    <p class="text-sm text-slate-700 leading-relaxed">{{ $review->reply }}</p>
+                                    <div class="mt-1 text-xs text-slate-400">
+                                        {{ $review->reply_by }} · {{ $review->reply_at->format('d M Y') }}
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @empty
                         <div class="p-8 text-center text-sm text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">

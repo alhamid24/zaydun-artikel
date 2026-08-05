@@ -55,11 +55,21 @@
 
         <!-- DAFTAR PRODUK -->
         <section class="max-w-6xl mx-auto px-4 mt-12">
-            <div class="flex items-center gap-3 mb-8 reveal">
-                <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-lg">🛒</div>
-                <div>
-                    <h2 class="text-lg font-extrabold text-slate-800">Produk Tumbuhan</h2>
-                    <p class="text-xs text-slate-500">{{ $totalProducts }} produk tersedia untuk tumbuhan kesayangan Anda</p>
+            <div class="flex items-center justify-between flex-wrap gap-3 mb-8 reveal">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-lg">🛒</div>
+                    <div>
+                        <h2 class="text-lg font-extrabold text-slate-800">Produk Tumbuhan</h2>
+                        <p class="text-xs text-slate-500">{{ $totalProducts }} produk tersedia untuk tumbuhan kesayangan Anda</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-wrap">
+                    @foreach(['terbaru' => 'Terbaru', 'termurah' => 'Termurah', 'termahal' => 'Termahal', 'best-seller' => 'Best Seller'] as $key => $label)
+                        <a href="{{ route('products.tumbuhan', ['sort' => $key]) }}"
+                           class="px-3.5 py-1.5 rounded-full text-xs font-bold border transition {{ ($sort ?? 'terbaru') === $key ? 'bg-emerald-600 text-white border-emerald-600 shadow' : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-400 hover:text-emerald-700' }}">
+                            {{ $label }}
+                        </a>
+                    @endforeach
                 </div>
             </div>
 

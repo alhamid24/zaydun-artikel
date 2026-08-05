@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\OwnerProfileController;
 use App\Http\Controllers\Admin\CategoryAdminController;
+use App\Http\Controllers\Admin\ReviewController;
 
 // 0. RUTE AUTENTIKASI ADMIN (Login/Logout - di luar middleware auth)
 Route::prefix('admin')->group(function () {
@@ -46,12 +47,16 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/articles/create', [AdminArticleController::class, 'create']);
     Route::post('/articles/import-word', [AdminArticleController::class, 'importWord']);
     Route::post('/articles', [AdminArticleController::class, 'store']);
+    Route::get('/articles/{id}/edit', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
+    Route::put('/articles/{id}', [AdminArticleController::class, 'update'])->name('admin.articles.update');
     Route::delete('/articles/{id}', [AdminArticleController::class, 'destroy'])->name('articles.destroy');
 
     // Rute Produk Admin
     Route::get('/products', [AdminProductController::class, 'index']);
     Route::get('/products/create', [AdminProductController::class, 'create']);
     Route::post('/products', [AdminProductController::class, 'store']);
+    Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/products/{id}', [AdminProductController::class, 'update'])->name('admin.products.update');
     Route::patch('/products/{id}/stock', [AdminProductController::class, 'updateStock'])->name('products.updateStock');
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
@@ -59,6 +64,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/owner-profile', [OwnerProfileController::class, 'edit']);
     Route::post('/owner-profile', [OwnerProfileController::class, 'update']);
     Route::delete('/owner-profile', [OwnerProfileController::class, 'destroy']);
+
+    // Rute Ulasan (Balas Ulasan User)
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
+    Route::post('/reviews/{id}/reply', [ReviewController::class, 'reply'])->name('admin.reviews.reply');
+    Route::get('/reviews/{id}/reply/edit', [ReviewController::class, 'editReply'])->name('admin.reviews.editReply');
+    Route::put('/reviews/{id}/reply', [ReviewController::class, 'updateReply'])->name('admin.reviews.updateReply');
+    Route::delete('/reviews/{id}/reply', [ReviewController::class, 'deleteReply'])->name('admin.reviews.deleteReply');
 
     // Rute Admin Kategori
     Route::get('/category-admins', [CategoryAdminController::class, 'index']);

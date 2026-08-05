@@ -36,6 +36,9 @@
                 <a href="{{ url('admin/owner-profile') }}" class="block px-4 py-2.5 rounded-xl {{ Request::is('admin/owner-profile*') ? 'bg-emerald-50 text-emerald-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 font-medium' }} text-sm transition">
                     Profil Pemilik
                 </a>
+                <a href="{{ url('admin/reviews') }}" class="block px-4 py-2.5 rounded-xl {{ Request::is('admin/reviews*') ? 'bg-emerald-50 text-emerald-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 font-medium' }} text-sm transition">
+                    📝 Ulasan
+                </a>
                 <a href="{{ url('admin/category-admins') }}" class="block px-4 py-2.5 rounded-xl {{ Request::is('admin/category-admins*') ? 'bg-emerald-50 text-emerald-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 font-medium' }} text-sm transition">
                     🐟 Admin Ikan & 🌱 Tumbuhan
                 </a>

@@ -63,6 +63,7 @@
                                 @method('DELETE')
                                 <button class="text-red-600 hover:text-red-800 font-semibold text-xs hover:underline">Hapus</button>
                             </form>
+                            <a href="{{ route('admin.products.edit', $product->id) }}" class="text-cyan-600 hover:text-cyan-800 font-semibold text-xs hover:underline">Edit</a>
                         </div>
                     </td>
                 </tr>

@@ -39,11 +39,14 @@
                         </span>
                     </td>
                     <td class="p-4 text-center">
-                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
-                            @csrf 
-                            @method('DELETE')
-                            <button class="text-red-600 hover:text-red-800 font-semibold hover:underline">Hapus</button>
-                        </form>
+                        <div class="flex items-center justify-center gap-4">
+                            <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-cyan-600 hover:text-cyan-800 font-semibold hover:underline">Edit</a>
+                            <form action="{{ route('articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                @csrf 
+                                @method('DELETE')
+                                <button class="text-red-600 hover:text-red-800 font-semibold hover:underline">Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty

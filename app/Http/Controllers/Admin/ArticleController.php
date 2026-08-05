@@ -61,7 +61,52 @@ class ArticleController extends Controller
         return max(1, ceil($words / 200));
     }
 
-    // 4. Hapus Artikel
+    // 4. Tampilkan Form Edit Artikel
+    public function edit($id)
+    {
+        $article = Article::with('category')->findOrFail($id);
+        $categories = Category::all();
+        return view('admin.articles.edit', compact('article', 'categories'));
+    }
+
+    // 5. Simpan Perubahan Artikel
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'content' => 'required',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $article = Article::findOrFail($id);
+
+        $data = [
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'category_id' => $request->category_id,
+            'tag' => $request->tag,
+            'content' => $request->content,
+            'reading_time' => $this->calculateReadingTime($request->content),
+            'is_published' => $request->has('is_published'),
+        ];
+
+        // Jika thumbnail diganti, upload yang baru lalu hapus yang lama
+        if ($request->hasFile('thumbnail')) {
+            if (file_exists(public_path('uploads/thumbnails/'.$article->thumbnail))) {
+                unlink(public_path('uploads/thumbnails/'.$article->thumbnail));
+            }
+            $imageName = time().'.'.$request->thumbnail->extension();
+            $request->thumbnail->move(public_path('uploads/thumbnails'), $imageName);
+            $data['thumbnail'] = $imageName;
+        }
+
+        $article->update($data);
+
+        return redirect('admin/articles')->with('success', 'Artikel "'.$article->title.'" berhasil diperbarui!');
+    }
+
+    // 6. Hapus Artikel
     public function destroy($id)
     {
         $article = Article::findOrFail($id);

@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function indexIkan()
+    public function indexIkan(Request $request)
     {
+        $sort = $request->query('sort', 'terbaru');
+        if (!in_array($sort, ['terbaru', 'termurah', 'termahal', 'best-seller'])) {
+            $sort = 'terbaru';
+        }
+
         $products = Product::with(['category', 'reviews'])
+            ->withAvg('reviews', 'rating')
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'ikan-cupang');
             })
-            ->latest()
-            ->paginate(9);
+            ->when($sort === 'termurah', fn ($q) => $q->orderBy('price', 'asc'))
+            ->when($sort === 'termahal', fn ($q) => $q->orderBy('price', 'desc'))
+            ->when($sort === 'best-seller', fn ($q) => $q->orderByDesc('reviews_avg_rating'))
+            ->when($sort === 'terbaru', fn ($q) => $q->latest())
+            ->paginate(9)
+            ->withQueryString();
 
         $totalProducts = Product::whereHas('category', function ($q) {
             $q->where('slug', 'ikan-cupang');
@@ -23,19 +33,34 @@ class ProductController extends Controller
 
         $topIds = Product::whereHas('category', function ($q) {
             $q->where('slug', 'ikan-cupang');
-        })->orderByDesc('views')->take(3)->pluck('id')->all();
+        })
+            ->withAvg('reviews', 'rating')
+            ->orderByDesc('reviews_avg_rating')
+            ->take(3)
+            ->pluck('id')
+            ->all();
 
-        return view('produk.ikan', compact('products', 'totalProducts', 'topIds'));
+        return view('produk.ikan', compact('products', 'totalProducts', 'topIds', 'sort'));
     }
 
-    public function indexTumbuhan()
+    public function indexTumbuhan(Request $request)
     {
+        $sort = $request->query('sort', 'terbaru');
+        if (!in_array($sort, ['terbaru', 'termurah', 'termahal', 'best-seller'])) {
+            $sort = 'terbaru';
+        }
+
         $products = Product::with(['category', 'reviews'])
+            ->withAvg('reviews', 'rating')
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
             })
-            ->latest()
-            ->paginate(9);
+            ->when($sort === 'termurah', fn ($q) => $q->orderBy('price', 'asc'))
+            ->when($sort === 'termahal', fn ($q) => $q->orderBy('price', 'desc'))
+            ->when($sort === 'best-seller', fn ($q) => $q->orderByDesc('reviews_avg_rating'))
+            ->when($sort === 'terbaru', fn ($q) => $q->latest())
+            ->paginate(9)
+            ->withQueryString();
 
         $totalProducts = Product::whereHas('category', function ($q) {
             $q->where('slug', 'like', '%tumbuhan%');
@@ -43,9 +68,14 @@ class ProductController extends Controller
 
         $topIds = Product::whereHas('category', function ($q) {
             $q->where('slug', 'like', '%tumbuhan%');
-        })->orderByDesc('views')->take(3)->pluck('id')->all();
+        })
+            ->withAvg('reviews', 'rating')
+            ->orderByDesc('reviews_avg_rating')
+            ->take(3)
+            ->pluck('id')
+            ->all();
 
-        return view('produk.tumbuhan', compact('products', 'totalProducts', 'topIds'));
+        return view('produk.tumbuhan', compact('products', 'totalProducts', 'topIds', 'sort'));
     }
 
     public function show($slug)
