@@ -45,9 +45,9 @@
                             <td class="py-3 pr-4 text-gray-500">{{ $admin->title ?? '-' }}</td>
                             <td class="py-3 pr-4">
                                 @if($admin->category == 'ikan')
-                                    <span class="bg-cyan-50 text-cyan-700 text-xs font-bold px-2.5 py-1 rounded-full">🐟 Ikan</span>
+                                    <span class="bg-cyan-50 text-cyan-700 text-xs font-bold px-2.5 py-1 rounded-full">Ikan</span>
                                 @else
-                                    <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">🌱 Tumbuhan</span>
+                                    <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">Tumbuhan</span>
                                 @endif
                             </td>
                             <td class="py-3 pr-4 text-gray-500">{{ $admin->phone ?? '-' }}</td>

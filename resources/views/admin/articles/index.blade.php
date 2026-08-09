@@ -25,7 +25,7 @@
                     <th class="p-4">Judul Artikel</th>
                     <th class="p-4">Kategori</th>
                     <th class="p-4">Status</th>
-                    <th class="p-4 text-center">Aksi</th>
+                    <th class="p-4 text-right">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,13 +38,13 @@
                             {{ $article->is_published ? 'Published' : 'Draft' }}
                         </span>
                     </td>
-                    <td class="p-4 text-center">
-                        <div class="flex items-center justify-center gap-4">
-                            <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-cyan-600 hover:text-cyan-800 font-semibold hover:underline">Edit</a>
+                    <td class="p-4">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ route('admin.articles.edit', $article->id) }}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-600 hover:text-white transition">Edit</a>
                             <form action="{{ route('articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
                                 @csrf 
                                 @method('DELETE')
-                                <button class="text-red-600 hover:text-red-800 font-semibold hover:underline">Hapus</button>
+                                <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white transition">Hapus</button>
                             </form>
                         </div>
                     </td>

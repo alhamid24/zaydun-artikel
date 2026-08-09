@@ -26,8 +26,8 @@
         @php
             $tabs = [
                 'semua' => 'Semua ('. $countSemua .')',
-                'ikan' => '🐟 Ikan ('. $countIkan .')',
-                'tumbuhan' => '🌱 Tumbuhan ('. $countTumbuhan .')',
+                'ikan' => 'Ikan ('. $countIkan .')',
+                'tumbuhan' => 'Tumbuhan ('. $countTumbuhan .')',
             ];
         @endphp
         @foreach($tabs as $key => $label)
@@ -85,13 +85,13 @@
                         </div>
                         <div class="flex items-center gap-5">
                             <a href="{{ route('admin.reviews.editReply', $review->id) }}?kategori={{ $kategori }}" class="text-cyan-600 hover:text-cyan-800 font-semibold text-sm hover:underline transition">
-                                ✏️ Edit Balasan
+                                Edit Balasan
                             </a>
                             <form action="{{ route('admin.reviews.deleteReply', $review->id) }}?kategori={{ $kategori }}" method="POST" onsubmit="return confirm('Hapus balasan untuk ulasan ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-amber-600 hover:text-amber-800 font-semibold text-sm hover:underline transition">
-                                    🗑️ Hapus Balasan
+                                    Hapus Balasan
                                 </button>
                             </form>
                         </div>

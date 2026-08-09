@@ -62,13 +62,13 @@
                         <div class="flex items-center gap-2 text-sm text-slate-500 flex-wrap">
                             <span class="flex items-center gap-0.5 text-lg">
                                 @for($i = 1; $i <= 5; $i++)
-                                    <span class="{{ $i <= round($product->averageRating()) ? 'text-amber-400' : 'text-slate-300' }}">★</span>
+                                    <x-icon :name="$i <= round($product->averageRating()) ? 'star' : 'star-outline'" :class="$i <= round($product->averageRating()) ? 'w-4 h-4 text-amber-400' : 'w-4 h-4 text-slate-300'" />
                                 @endfor
                             </span>
                             <span class="font-bold text-slate-800">{{ number_format($product->averageRating(), 1, ',', '.') }}</span>
                             <span>({{ $product->reviewsCount() }} ulasan)</span>
                             <span class="text-slate-400">•</span>
-                            <span>👁 {{ $product->views }} dilihat</span>
+                            <span class="inline-flex items-center gap-1"><x-icon name="eye" class="w-4 h-4" /> {{ $product->views }} dilihat</span>
                         </div>
 
                         @if($product->description)
@@ -79,7 +79,7 @@
 
                         <div class="pt-4 space-y-3">
                             <a href="{{ route('products.order', $product->slug) }}" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-3.5 rounded-xl transition shadow-sm w-full justify-center">
-                                💬 Beli via WhatsApp Sekarang
+                                <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Beli via WhatsApp Sekarang
                             </a>
                             <p class="text-xs text-slate-400 text-center">Klik untuk mengisi data pemesanan</p>
                         </div>
@@ -91,7 +91,7 @@
         <!-- RATING & ULASAN -->
         <section class="max-w-6xl mx-auto px-4 mt-14 reveal">
             <div class="flex items-center gap-3 mb-8">
-                <div class="w-10 h-10 {{ $product->category->slug === 'ikan-cupang' ? 'bg-cyan-100' : 'bg-emerald-100' }} rounded-xl flex items-center justify-center text-lg">⭐</div>
+                <div class="w-10 h-10 {{ $product->category->slug === 'ikan-cupang' ? 'bg-cyan-100' : 'bg-emerald-100' }} rounded-xl flex items-center justify-center"><x-icon name="star" class="w-5 h-5 text-amber-500" /></div>
                 <div>
                     <h2 class="text-lg font-extrabold text-slate-800">Rating & Ulasan</h2>
                     <p class="text-xs text-slate-500">Pengalaman pembeli lain menjadi pertimbangan Anda</p>
@@ -131,7 +131,7 @@
                             <div class="flex items-center gap-1 text-3xl">
                                 <template x-for="i in 5" :key="i">
                                     <button type="button" @click="rating = i" class="transition hover:scale-110 focus:outline-none">
-                                        <span :class="i <= rating ? 'text-amber-400' : 'text-slate-300'">★</span>
+                                        <svg class="w-7 h-7" :class="i <= rating ? 'text-amber-400' : 'text-slate-300'" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"/></svg>
                                     </button>
                                 </template>
                                 <span class="ml-2 text-sm font-bold text-slate-700" x-text="rating + '/5'"></span>
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="flex items-center gap-0.5 text-lg">
                                     @for($i = 1; $i <= 5; $i++)
-                                        <span class="{{ $i <= $review->rating ? 'text-amber-400' : 'text-slate-300' }}">★</span>
+                                        <x-icon name="star" :class="$i <= $review->rating ? 'w-4 h-4 text-amber-400' : 'w-4 h-4 text-slate-300'" />
                                     @endfor
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                             @if($review->reply)
                                 <div class="mt-4 bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
                                     <div class="flex items-center gap-2 mb-1">
-                                        <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-xs font-black">🛡</div>
+                                        <div class="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center"><x-icon name="shield-check" class="w-4 h-4" /></div>
                                         <span class="text-xs font-bold text-emerald-700 uppercase tracking-wide">Zaydun</span>
                                     </div>
                                     <p class="text-sm text-slate-700 leading-relaxed">{{ $review->reply }}</p>
@@ -200,7 +200,7 @@
         @if($relatedProducts->count() > 0)
         <section class="max-w-6xl mx-auto px-4 mt-14 mb-10 reveal">
             <div class="flex items-center gap-3 mb-8">
-                <div class="w-10 h-10 {{ $product->category->slug === 'ikan-cupang' ? 'bg-cyan-100' : 'bg-emerald-100' }} rounded-xl flex items-center justify-center text-lg">🛒</div>
+                <div class="w-10 h-10 {{ $product->category->slug === 'ikan-cupang' ? 'bg-cyan-100' : 'bg-emerald-100' }} rounded-xl flex items-center justify-center"><x-icon name="shopping-cart" class="w-5 h-5 {{ $product->category->slug === 'ikan-cupang' ? 'text-cyan-600' : 'text-emerald-600' }}" /></div>
                 <div>
                     <h2 class="text-lg font-extrabold text-slate-800">Produk Terkait</h2>
                     <p class="text-xs text-slate-500">Lihat juga produk lainnya dari kategori {{ $product->category->name }}</p>

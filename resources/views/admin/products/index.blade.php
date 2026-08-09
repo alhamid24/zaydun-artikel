@@ -56,14 +56,16 @@
                                 @method('PATCH')
                                 <input type="number" name="stock" min="0" value="{{ $product->stock }}"
                                     class="w-20 px-2 py-1.5 border border-gray-300 rounded-lg text-center text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                                <button class="text-emerald-600 hover:text-emerald-800 font-semibold text-sm hover:underline whitespace-nowrap">Simpan</button>
+                                <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition whitespace-nowrap">Simpan Stok</button>
                             </form>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus produk ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="text-red-600 hover:text-red-800 font-semibold text-xs hover:underline">Hapus</button>
-                            </form>
-                            <a href="{{ route('admin.products.edit', $product->id) }}" class="text-cyan-600 hover:text-cyan-800 font-semibold text-xs hover:underline">Edit</a>
+                            <div class="flex items-center gap-2">
+                                <a href="{{ route('admin.products.edit', $product->id) }}" class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-600 hover:text-white transition">Edit</a>
+                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus produk ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white transition">Hapus</button>
+                                </form>
+                            </div>
                         </div>
                     </td>
                 </tr>

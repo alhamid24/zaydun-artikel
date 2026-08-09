@@ -9,32 +9,47 @@
 
     <!-- KARTU RINGKASAN DATA -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Artikel</h3>
-            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalArtikel }} <span class="text-sm font-normal text-gray-500">konten</span></p>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Artikel</h3>
+                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalArtikel }} <span class="text-sm font-normal text-gray-500">konten</span></p>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center"><x-icon name="document-text" class="w-6 h-6 text-emerald-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Produk</h3>
-            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalProduk }} <span class="text-sm font-normal text-gray-500">produk</span></p>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Produk</h3>
+                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalProduk }} <span class="text-sm font-normal text-gray-500">produk</span></p>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-cyan-50 flex items-center justify-center"><x-icon name="shopping-cart" class="w-6 h-6 text-cyan-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Pembaca</h3>
-            <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($totalViews) }} <span class="text-sm font-normal text-gray-500">kali dibaca</span></p>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Pembaca</h3>
+                <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($totalViews) }} <span class="text-sm font-normal text-gray-500">kali dibaca</span></p>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center"><x-icon name="eye" class="w-6 h-6 text-amber-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Category Admin</h3>
-            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalCategoryAdmins }} <span class="text-sm font-normal text-gray-500">admin</span></p>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Category Admin</h3>
+                <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalCategoryAdmins }} <span class="text-sm font-normal text-gray-500">admin</span></p>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center"><x-icon name="users" class="w-6 h-6 text-violet-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Status Website</h3>
-            <p class="text-xl font-bold text-emerald-600 mt-3 flex items-center">
-                <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full inline-block mr-2 animate-pulse"></span>
-                Online / Aktif
-            </p>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+            <div>
+                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Status Website</h3>
+                <p class="text-xl font-bold text-emerald-600 mt-3 flex items-center">
+                    <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full inline-block mr-2 animate-pulse"></span>
+                    Online / Aktif
+                </p>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center"><span class="w-4 h-4 rounded-full bg-emerald-500"></span></div>
         </div>
     </div>
 
@@ -42,7 +57,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="p-5 border-b border-gray-200">
-                <h2 class="font-bold text-gray-900">🐟 Stok Produk Ikan</h2>
+                <h2 class="font-bold text-gray-900 inline-flex items-center gap-2"><x-icon name="fish" class="w-5 h-5 text-cyan-500" /> Stok Produk Ikan</h2>
                 <p class="text-xs text-gray-500 mt-0.5">Sisa stok per produk ikan</p>
             </div>
             <div class="p-5">
@@ -58,7 +73,7 @@
 
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="p-5 border-b border-gray-200">
-                <h2 class="font-bold text-gray-900">🌱 Stok Produk Tumbuhan</h2>
+                <h2 class="font-bold text-gray-900 inline-flex items-center gap-2"><x-icon name="sprout" class="w-5 h-5 text-emerald-500" /> Stok Produk Tumbuhan</h2>
                 <p class="text-xs text-gray-500 mt-0.5">Sisa stok per produk tumbuhan</p>
             </div>
             <div class="p-5">

@@ -43,7 +43,7 @@
                 </div>
                 <div class="flex-1 text-center md:text-left space-y-4">
                     <div>
-                        <h2 class="text-2xl font-black text-slate-800">👋 Hai, saya {{ $owner->name }}</h2>
+                        <h2 class="text-2xl font-black text-slate-800">Hai, saya {{ $owner->name }}</h2>
                         @if($owner->title)
                             <p class="text-cyan-600 font-bold text-sm mt-1">{{ $owner->title }}</p>
                         @endif
@@ -53,7 +53,7 @@
                     @endif
                     <div class="pt-2">
                         <a href="https://wa.me/6281234567890?text=Halo%20{{ urlencode($owner->name) }},%20saya%20ingin%20bertanya%20seputar%20Zaydun" target="_blank" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow-sm">
-                            💬 Chat dengan {{ $owner->name }}
+                            <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Chat dengan {{ $owner->name }}
                         </a>
                     </div>
                 </div>
@@ -85,12 +85,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
                 <div class="bg-cyan-50 rounded-2xl p-5 border border-cyan-100">
-                    <div class="text-2xl mb-2">🐟</div>
+                    <div class="mb-2"><x-icon name="fish" class="w-8 h-8 text-cyan-500" /></div>
                     <h3 class="font-bold text-slate-800 text-sm">Ikan Cupang</h3>
                     <p class="text-xs text-slate-500 mt-1">Tips perawatan, jenis-jenis, dan produk unggulan untuk ikan cupang Anda.</p>
                 </div>
                 <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
-                    <div class="text-2xl mb-2">🌱</div>
+                    <div class="mb-2"><x-icon name="sprout" class="w-8 h-8 text-emerald-500" /></div>
                     <h3 class="font-bold text-slate-800 text-sm">Tumbuhan</h3>
                     <p class="text-xs text-slate-500 mt-1">Panduan menanam, perawatan, dan produk untuk hobi berkebun Anda.</p>
                 </div>

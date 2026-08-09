@@ -38,8 +38,8 @@
             <label class="block text-gray-700 text-sm font-semibold mb-2">Kategori <span class="text-red-500">*</span></label>
             <select name="category" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
                 <option value="" disabled {{ !$admin->exists ? 'selected' : '' }}>-- Pilih kategori --</option>
-                <option value="ikan" {{ old('category', $admin->category) == 'ikan' ? 'selected' : '' }}>🐟 Ikan Cupang</option>
-                <option value="tumbuhan" {{ old('category', $admin->category) == 'tumbuhan' ? 'selected' : '' }}>🌱 Tumbuhan</option>
+                <option value="ikan" {{ old('category', $admin->category) == 'ikan' ? 'selected' : '' }}>Ikan Cupang</option>
+                <option value="tumbuhan" {{ old('category', $admin->category) == 'tumbuhan' ? 'selected' : '' }}>Tumbuhan</option>
             </select>
         </div>
 

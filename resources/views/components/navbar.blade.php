@@ -92,10 +92,10 @@
                     style="display: none;"
                 >
                     <a href="{{ route('kategori.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
-                        <span class="text-base">🐟</span> Ikan
+                        <x-icon name="fish" class="w-4 h-4 text-cyan-500" /> Ikan
                     </a>
                     <a href="{{ route('kategori.tumbuhan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition">
-                        <span class="text-base">🌱</span> Tumbuhan
+                        <x-icon name="sprout" class="w-4 h-4 text-emerald-500" /> Tumbuhan
                     </a>
                 </div>
             </div>
@@ -124,10 +124,10 @@
                     style="display: none;"
                 >
                     <a href="{{ route('products.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
-                        <span class="text-base">🐟</span> Produk Ikan
+                        <x-icon name="fish" class="w-4 h-4 text-cyan-500" /> Produk Ikan
                     </a>
                     <a href="{{ route('products.tumbuhan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition">
-                        <span class="text-base">🌱</span> Produk Tumbuhan
+                        <x-icon name="sprout" class="w-4 h-4 text-emerald-500" /> Produk Tumbuhan
                     </a>
                 </div>
             </div>
@@ -198,19 +198,19 @@
         </a>
 
         <a href="{{ route('kategori.ikan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('kategori.ikan') ? 'text-cyan-600 font-bold bg-cyan-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
-            🐟 Ikan
+            <x-icon name="fish" class="w-4 h-4 inline-block -mt-0.5 align-middle text-cyan-500" /> Ikan
         </a>
 
         <a href="{{ route('kategori.tumbuhan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('kategori.tumbuhan') ? 'text-emerald-600 font-bold bg-emerald-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
-            🌱 Tumbuhan
+            <x-icon name="sprout" class="w-4 h-4 inline-block -mt-0.5 align-middle text-emerald-500" /> Tumbuhan
         </a>
 
         <a href="{{ route('products.ikan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('products.ikan') ? 'text-cyan-600 font-bold bg-cyan-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
-            🐟 Produk Ikan
+            <x-icon name="fish" class="w-4 h-4 inline-block -mt-0.5 align-middle text-cyan-500" /> Produk Ikan
         </a>
 
         <a href="{{ route('products.tumbuhan') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('products.tumbuhan') ? 'text-emerald-600 font-bold bg-emerald-50' : 'text-slate-600 hover:bg-slate-50' }} transition">
-            🌱 Produk Tumbuhan
+            <x-icon name="sprout" class="w-4 h-4 inline-block -mt-0.5 align-middle text-emerald-500" /> Produk Tumbuhan
         </a>
 
         <a href="{{ route('artikel.index') }}" class="block px-3 py-2.5 rounded-xl text-sm font-semibold {{ request()->routeIs('artikel.index') ? $t['active'] . ' bg-slate-50' : 'text-slate-600 hover:bg-slate-50' }} transition">

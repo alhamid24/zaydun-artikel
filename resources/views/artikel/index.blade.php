@@ -32,7 +32,7 @@
         <section>
             <div class="flex items-center justify-between mb-5 reveal">
                 <h2 class="text-xl font-extrabold text-cyan-700 flex items-center gap-2">
-                    <span>🐟</span> Artikel Ikan
+                    <x-icon name="fish" class="w-5 h-5 text-cyan-500" /> Artikel Ikan
                 </h2>
                 <a href="{{ route('kategori.ikan') }}" class="text-sm font-semibold text-cyan-600 hover:text-cyan-700 hover:underline transition">
                     Lihat Semua &rarr;
@@ -43,14 +43,18 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
                     @foreach($articlesFish as $article)
                         <a href="{{ route('articles.show', $article->slug) }}" class="z-card bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md hover:border-cyan-300 transition-all duration-200 group">
-                            <img loading="lazy" decoding="async" src="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-44 object-cover">
+                            <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
+                                <img loading="lazy" decoding="async" src="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
                             <div class="p-4">
                                 <span class="text-xs font-bold text-cyan-600 uppercase">{{ $article->category->name }}</span>
                                 <h3 class="font-bold text-slate-800 text-base mt-1.5 line-clamp-2 group-hover:text-cyan-600 transition">{{ $article->title }}</h3>
                                 <div class="flex items-center gap-3 mt-3 text-xs text-slate-400">
-                                    <span>⏱️ {{ $article->reading_time }} mnt</span>
+                                    <span class="inline-flex items-center gap-1"><x-icon name="clock" class="w-4 h-4" /> {{ $article->reading_time }} mnt</span>
                                     <span>•</span>
                                     <span>{{ $article->created_at->format('d M Y') }}</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center gap-1"><x-icon name="eye" class="w-4 h-4" /> {{ $article->views ?? 0 }}</span>
                                 </div>
                             </div>
                         </a>
@@ -65,7 +69,7 @@
         <section>
             <div class="flex items-center justify-between mb-5 reveal">
                 <h2 class="text-xl font-extrabold text-emerald-700 flex items-center gap-2">
-                    <span>🌱</span> Artikel Tumbuhan
+                    <x-icon name="sprout" class="w-5 h-5 text-emerald-500" /> Artikel Tumbuhan
                 </h2>
                 <a href="{{ route('kategori.tumbuhan') }}" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 hover:underline transition">
                     Lihat Semua &rarr;
@@ -76,14 +80,18 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
                     @foreach($articlesPlant as $article)
                         <a href="{{ route('articles.show', $article->slug) }}" class="z-card bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md hover:border-emerald-300 transition-all duration-200 group">
-                            <img loading="lazy" decoding="async" src="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-44 object-cover">
+                            <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
+                                <img loading="lazy" decoding="async" src="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
                             <div class="p-4">
                                 <span class="text-xs font-bold text-emerald-600 uppercase">{{ $article->category->name }}</span>
                                 <h3 class="font-bold text-slate-800 text-base mt-1.5 line-clamp-2 group-hover:text-emerald-600 transition">{{ $article->title }}</h3>
                                 <div class="flex items-center gap-3 mt-3 text-xs text-slate-400">
-                                    <span>⏱️ {{ $article->reading_time }} mnt</span>
+                                    <span class="inline-flex items-center gap-1"><x-icon name="clock" class="w-4 h-4" /> {{ $article->reading_time }} mnt</span>
                                     <span>•</span>
                                     <span>{{ $article->created_at->format('d M Y') }}</span>
+                                    <span>•</span>
+                                    <span class="inline-flex items-center gap-1"><x-icon name="eye" class="w-4 h-4" /> {{ $article->views ?? 0 }}</span>
                                 </div>
                             </div>
                         </a>

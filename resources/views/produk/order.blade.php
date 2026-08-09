@@ -107,7 +107,7 @@
                     <!-- Tombol Kirim -->
                     <div class="pt-4">
                         <button onclick="kirimPesan()" class="z-btn w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-4 rounded-xl transition shadow-sm flex items-center justify-center gap-2">
-                            💬 Kirim Pesan ke WhatsApp
+                            <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Kirim Pesan ke WhatsApp
                         </button>
                         <p class="text-xs text-slate-400 text-center mt-2">Data tidak disimpan, langsung dikirim via WhatsApp</p>
                     </div>
@@ -190,18 +190,18 @@
             const formatRupiah = (num) => 'Rp ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
             let pesan = `Halo Admin Zaydun, saya ingin memesan:\n\n`;
-            pesan += `📦 PESANAN:\n`;
+            pesan += `PESANAN:\n`;
             pesan += `Produk: {{ $product->name }}\n`;
             pesan += `Harga: ${formatRupiah(harga)}\n`;
             pesan += `Jumlah: ${jumlah}\n`;
             pesan += `Total: ${formatRupiah(total)}\n\n`;
-            pesan += `👤 DATA PEMESAN:\n`;
+            pesan += `DATA PEMESAN:\n`;
             pesan += `Nama: ${nama}\n`;
             pesan += `No. WA: ${nowa}\n`;
             pesan += `Alamat: ${alamat}\n`;
             pesan += `Jasa Kirim: ${jasakirim}\n`;
             if (catatan) {
-                pesan += `\n📝 Catatan:\n${catatan}\n`;
+                pesan += `\nCatatan:\n${catatan}\n`;
             }
             pesan += `\nMohon info total + ongkir. Terima kasih.`;
 
