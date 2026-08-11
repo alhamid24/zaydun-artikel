@@ -9,7 +9,7 @@
 
     <!-- KARTU RINGKASAN DATA -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between hover:shadow-md hover:border-emerald-200 transition">
             <div>
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Artikel</h3>
                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalArtikel }} <span class="text-sm font-normal text-gray-500">konten</span></p>
@@ -17,7 +17,7 @@
             <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center"><x-icon name="document-text" class="w-6 h-6 text-emerald-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between hover:shadow-md hover:border-cyan-200 transition">
             <div>
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Produk</h3>
                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalProduk }} <span class="text-sm font-normal text-gray-500">produk</span></p>
@@ -25,7 +25,7 @@
             <div class="w-11 h-11 rounded-xl bg-cyan-50 flex items-center justify-center"><x-icon name="shopping-cart" class="w-6 h-6 text-cyan-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between hover:shadow-md hover:border-amber-200 transition">
             <div>
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Pembaca</h3>
                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ number_format($totalViews) }} <span class="text-sm font-normal text-gray-500">kali dibaca</span></p>
@@ -33,7 +33,7 @@
             <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center"><x-icon name="eye" class="w-6 h-6 text-amber-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between hover:shadow-md hover:border-violet-200 transition">
             <div>
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Total Category Admin</h3>
                 <p class="text-3xl font-bold text-gray-900 mt-2">{{ $totalCategoryAdmins }} <span class="text-sm font-normal text-gray-500">admin</span></p>
@@ -41,7 +41,7 @@
             <div class="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center"><x-icon name="users" class="w-6 h-6 text-violet-500" /></div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex items-start justify-between hover:shadow-md hover:border-emerald-200 transition">
             <div>
                 <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Status Website</h3>
                 <p class="text-xl font-bold text-emerald-600 mt-3 flex items-center">

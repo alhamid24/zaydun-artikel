@@ -61,7 +61,10 @@
                     @endforeach
                 </div>
             @else
-                <div class="p-12 text-center text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">Belum ada artikel ikan.</div>
+                <div class="flex flex-col items-center gap-2 p-12 text-center text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">
+                    <div class="w-12 h-12 rounded-full bg-cyan-50 flex items-center justify-center"><x-icon name="fish" class="w-6 h-6 text-cyan-400" /></div>
+                    <p class="text-sm font-medium">Belum ada artikel ikan.</p>
+                </div>
             @endif
         </section>
 
@@ -98,14 +101,18 @@
                     @endforeach
                 </div>
             @else
-                <div class="p-12 text-center text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">Belum ada artikel tumbuhan.</div>
+                <div class="flex flex-col items-center gap-2 p-12 text-center text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">
+                    <div class="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center"><x-icon name="sprout" class="w-6 h-6 text-emerald-400" /></div>
+                    <p class="text-sm font-medium">Belum ada artikel tumbuhan.</p>
+                </div>
             @endif
         </section>
     </main>
 
     <!-- FOOTER -->
     <footer id="kontak" class="bg-slate-900 mt-20 pt-14 pb-8 text-sm text-slate-400">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500"></div>
+        <div class="max-w-6xl mx-auto px-4 pt-12">
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
 

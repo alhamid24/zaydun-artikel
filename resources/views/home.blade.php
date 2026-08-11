@@ -353,7 +353,7 @@
                     <p class="text-emerald-100 text-sm md:text-base mb-6 max-w-xl mx-auto">
                         Tim Zaydun siap membantu Anda memilih produk atau memberikan tips perawatan terbaik.
                     </p>
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition">
+                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition active:scale-95">
                         <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Pesan via WhatsApp →
                     </a>
                 </div>

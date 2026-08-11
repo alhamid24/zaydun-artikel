@@ -34,7 +34,7 @@
     $t = $themes[$theme] ?? $themes['netral'];
 @endphp
 
-<header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50" x-data="{ mobileOpen: false, dropdownOpen: false, produkOpen: false }">
+<header class="bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm shadow-slate-200/50 sticky top-0 z-50" x-data="{ mobileOpen: false, dropdownOpen: false, produkOpen: false }">
     <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center gap-4">
 
         {{-- LOGO --}}
@@ -88,7 +88,7 @@
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
-                    class="absolute left-0 mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 p-2 space-y-1"
+                    class="absolute left-0 mt-2 w-52 bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/60 z-50 p-2 space-y-1"
                     style="display: none;"
                 >
                     <a href="{{ route('kategori.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">
@@ -120,7 +120,7 @@
                     x-transition:leave="transition ease-in duration-150"
                     x-transition:leave-start="opacity-100 translate-y-0"
                     x-transition:leave-end="opacity-0 translate-y-1"
-                    class="absolute left-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 p-2 space-y-1"
+                    class="absolute left-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/60 z-50 p-2 space-y-1"
                     style="display: none;"
                 >
                     <a href="{{ route('products.ikan') }}" class="z-dropdown-item flex items-center gap-2.5 px-3 py-2.5 text-xs font-semibold text-slate-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition">

@@ -47,7 +47,7 @@
                 <p class="text-cyan-100 text-sm md:text-base mb-6 max-w-2xl mx-auto leading-relaxed">
                     Pakan, obat, perlengkapan, dan aksesori ikan cupang pilihan. Pesan langsung melalui WhatsApp.
                 </p>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Ikan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-cyan-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition">
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Ikan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-cyan-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition active:scale-95">
                     <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Tanya Produk via WhatsApp
                 </a>
             </div>
@@ -126,7 +126,7 @@
                     <p class="text-cyan-100 text-sm md:text-base mb-6 max-w-xl mx-auto">
                         Tim Zaydun siap membantu Anda memilih produk yang paling cocok untuk cupang Anda.
                     </p>
-                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Ikan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-cyan-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Ikan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-cyan-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition active:scale-95">
                         <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Chat Admin via WhatsApp →
                     </a>
                 </div>
@@ -137,7 +137,8 @@
 
     <!-- FOOTER -->
     <footer class="bg-slate-900 mt-10 pt-14 pb-8 text-sm text-slate-400">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-400"></div>
+        <div class="max-w-6xl mx-auto px-4 pt-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
                 <div class="space-y-3">
                     <span class="font-extrabold text-2xl text-cyan-400 tracking-wider">Zaydun</span>

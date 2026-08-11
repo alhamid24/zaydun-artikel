@@ -78,7 +78,7 @@
                         @endif
 
                         <div class="pt-4 space-y-3">
-                            <a href="{{ route('products.order', $product->slug) }}" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-3.5 rounded-xl transition shadow-sm w-full justify-center">
+                            <a href="{{ route('products.order', $product->slug) }}" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-3.5 rounded-xl transition shadow-sm w-full justify-center active:scale-95">
                                 <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Beli via WhatsApp Sekarang
                             </a>
                             <p class="text-xs text-slate-400 text-center">Klik untuk mengisi data pemesanan</p>
@@ -99,13 +99,15 @@
             </div>
 
             @if(session('success'))
-                <div class="bg-emerald-100 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-2xl text-sm font-medium mb-6">
+                <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3.5 rounded-2xl text-sm font-medium mb-6">
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     {{ session('success') }}
                 </div>
             @endif
 
             @if($errors->any())
-                <div class="bg-red-100 border border-red-200 text-red-700 px-4 py-3 rounded-2xl text-sm font-medium mb-6">
+                <div class="flex items-start gap-2.5 bg-red-50 border border-red-200 text-red-700 px-4 py-3.5 rounded-2xl text-sm font-medium mb-6">
+                    <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <ul class="list-disc pl-5">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -229,7 +231,8 @@
 
     <!-- FOOTER -->
     <footer class="bg-slate-900 mt-10 pt-14 pb-8 text-sm text-slate-400">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500"></div>
+        <div class="max-w-6xl mx-auto px-4 pt-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
                 <div class="space-y-3">
                     <span class="font-extrabold text-2xl text-cyan-400 tracking-wider">Zaydun</span>

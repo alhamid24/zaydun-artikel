@@ -86,6 +86,7 @@
     </main>
 
     <footer class="bg-slate-900 py-6 text-center text-xs text-slate-500">
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500 -mt-6 mb-5"></div>
         &copy; {{ date('Y') }} Zaydun. All rights reserved.
     </footer>
 

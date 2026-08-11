@@ -74,7 +74,8 @@
 
     <!-- FOOTER -->
     <footer id="kontak" class="bg-slate-900 mt-20 pt-14 pb-8 text-sm text-slate-400">
-        <div class="max-w-6xl mx-auto px-4">
+        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500"></div>
+        <div class="max-w-6xl mx-auto px-4 pt-12">
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-slate-800">
 
