@@ -39,7 +39,7 @@
 
         {{-- LOGO --}}
         <a href="{{ route('home') }}" class="text-2xl font-extrabold tracking-wider {{ $t['logo'] }} shrink-0 transition-transform duration-300 hover:scale-105">
-            Zaydun
+            Zaydun Farm Indonesia
         </a>
 
         {{-- SEARCH BAR (Desktop) --}}

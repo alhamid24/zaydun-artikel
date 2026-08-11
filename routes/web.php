@@ -25,6 +25,12 @@ Route::prefix('admin')->group(function () {
 
 // 1. RUTE PUBLIK
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/ikan-cupang', function() {
+    return view('ikan-cupang');
+});
+Route::get('/tumbuhan', function() {
+    return view('tumbuhan');
+});
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/kategori/ikan', [KategoriController::class, 'ikan'])->name('kategori.ikan');
 Route::get('/kategori/tumbuhan', [KategoriController::class, 'tumbuhan'])->name('kategori.tumbuhan');
