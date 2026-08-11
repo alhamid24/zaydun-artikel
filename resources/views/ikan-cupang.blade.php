@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Aquariums</title>
-    <!-- Mengambil Tailwind CSS via CDN untuk kemudahan (Hapus jika sudah terinstal via Vite) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Mengambil Google Fonts untuk tipografi yang mirip dengan desain -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,900&family=Playball&display=swap" rel="stylesheet">
-    
-    <style>
-        .font-serif-italic { font-family: 'Merriweather', serif; font-style: italic; }
-        .font-cursive { font-family: 'Playball', cursive; }
-    </style>
-</head>
-<body class="bg-[#F8F9FA] text-gray-700 font-sans">
-
+<x-layout title="ikan-cupang" theme="ikan">
     <!-- HERO SECTION -->
     <header class="relative bg-blue-900 bg-center bg-cover pb-12 pt-20" style="background-image: url('https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1920&auto=format&fit=crop');">
         <!-- Overlay Gelap -->
@@ -168,6 +151,4 @@
         </div>
         <p>2013 © Privacy Policy</p>
     </footer>
-
-</body>
-</html>
+</x-layout>

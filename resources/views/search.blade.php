@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pencarian: {{ $query }} - Zaydun</title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <meta property="og:site_name" content="Zaydun">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="Pencarian: {{ $query }} - Zaydun">
-    <meta property="og:description" content="Hasil pencarian untuk {{ $query }} di Zaydun.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-    <script defer src="{{ asset('js/animate.js') }}"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
-</head>
-<body class="bg-slate-50 text-gray-800 font-sans flex flex-col min-h-screen justify-between">
-
-    <x-navbar />
-
+<x-layout title="search" theme="search">
     <main class="max-w-6xl mx-auto px-4 py-10 flex-1 w-full">
         <div class="mb-8 reveal">
             <h1 class="text-2xl font-extrabold text-slate-800">Hasil Pencarian</h1>
@@ -84,11 +61,4 @@
             </div>
         @endif
     </main>
-
-    <footer class="bg-slate-900 py-6 text-center text-xs text-slate-500">
-        <div class="h-1 bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500 -mt-6 mb-5"></div>
-        &copy; {{ date('Y') }} Zaydun. All rights reserved.
-    </footer>
-
-</body>
-</html>
+</x-layout>
