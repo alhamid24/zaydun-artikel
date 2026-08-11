@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -21,7 +22,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        $subcategories = Subcategory::with('category')->get();
+        return view('admin.products.create', compact('categories', 'subcategories'));
     }
 
     // 3. Simpan Produk Baru
@@ -30,6 +32,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required',
+            'subcategory_id' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer|min:0',
             'whatsapp_number' => 'required',
@@ -45,6 +48,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
             'price' => $request->price,
             'stock' => $request->stock,
             'whatsapp_number' => $request->whatsapp_number,
@@ -60,7 +64,8 @@ class ProductController extends Controller
     {
         $product = Product::with('category')->findOrFail($id);
         $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $subcategories = Subcategory::with('category')->get();
+        return view('admin.products.edit', compact('product', 'categories', 'subcategories'));
     }
 
     // 5. Simpan Perubahan Produk
@@ -69,6 +74,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'category_id' => 'required',
+            'subcategory_id' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer|min:0',
             'whatsapp_number' => 'required',
@@ -81,6 +87,7 @@ class ProductController extends Controller
         $data = [
             'name' => $request->name,
             'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
             'price' => $request->price,
             'stock' => $request->stock,
             'whatsapp_number' => $request->whatsapp_number,

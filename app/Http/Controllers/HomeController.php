@@ -37,7 +37,7 @@ class HomeController extends Controller
             ->sortByDesc(function ($product) {
                 return [$product->views, $product->averageRating()];
             })
-            ->take(3)
+            ->take(6)
             ->values();
 
         // 4. Produk BEST SELLER TUMBUH-TUMBUHAN
@@ -49,7 +49,7 @@ class HomeController extends Controller
             ->sortByDesc(function ($product) {
                 return [$product->views, $product->averageRating()];
             })
-            ->take(3)
+            ->take(6)
             ->values();
 
         return view('home', compact(

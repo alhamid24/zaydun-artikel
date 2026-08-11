@@ -69,9 +69,9 @@
                     <span class="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Paling Laris</span>
                 </div>
                 @if($bestSellerFish->count() > 0)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="flex gap-5 overflow-x-auto scrollbar-thin scrollbar-thumb-cyan-300 scrollbar-track-cyan-100">
                         @foreach($bestSellerFish as $product)
-                            <div class="z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
+                            <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
                                 <span class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Best Seller</span>
                                 <a href="{{ route('products.show', $product->slug) }}">
                                     <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
@@ -99,7 +99,14 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
+                        <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
+                            <a href="{{ route('products.ikan') }}" class="flex flex-col items-center justify-center h-full p-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-3">
+                                    <x-icon name="arrow-right" class="w-6 h-6 text-cyan-500" />
+                                </div>
+                                <span class="text-sm font-bold text-cyan-600">Lihat Semua Produk</span>
+                            </div>
+                        </div>
                 @else
                     <div class="p-8 text-center text-sm text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">Belum ada produk Best Seller Ikan Cupang.</div>
                 @endif
@@ -161,9 +168,9 @@
                     <span class="text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Paling Laris</span>
                 </div>
                 @if($bestSellerPlant->count() > 0)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="flex gap-5 overflow-x-auto scrollbar-thin scrollbar-thumb-cyan-300 scrollbar-track-cyan-100">
                         @foreach($bestSellerPlant as $product)
-                            <div class="z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
+                            <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
                                 <span class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Best Seller</span>
                                 <a href="{{ route('products.show', $product->slug) }}">
                                     <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
@@ -191,6 +198,15 @@
                                 </div>
                             </div>
                         @endforeach
+                        <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
+                            <a href="{{ route('products.tumbuhan') }}" class="flex flex-col items-center justify-center h-full p-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-3">
+                                    <x-icon name="arrow-right" class="w-6 h-6 text-cyan-500" />
+                                </div>
+                                <span class="text-sm font-bold text-cyan-600">Lihat Semua Produk</span>
+                            </div>
+                        </div>
+
                     </div>
                 @else
                     <div class="p-8 text-center text-sm text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">Belum ada produk Best Seller Tumbuhan.</div>

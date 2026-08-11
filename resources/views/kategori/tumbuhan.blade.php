@@ -117,6 +117,53 @@
                 </div>
             </div>
 
+            <!-- FILTER PRODUK TUMBUHAN -->
+            <form action="{{ route('kategori.tumbuhan') }}" method="GET" class="bg-white border border-slate-200 rounded-2xl p-4 md:p-5 mb-8 shadow-sm reveal">
+                @if(request('tag'))
+                    <input type="hidden" name="tag" value="{{ request('tag') }}">
+                @endif
+                <div class="flex flex-col lg:flex-row lg:items-end gap-5">
+                    <div class="grid grid-cols-2 gap-3 lg:w-64 shrink-0">
+                        <div>
+                            <label class="text-xs text-slate-500 font-semibold mb-1 block">Harga Min (Rp)</label>
+                            <input type="number" name="min_price" value="{{ request('min_price') }}" min="0" placeholder="0" class="w-full text-xs px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-500 font-semibold mb-1 block">Harga Max (Rp)</label>
+                            <input type="number" name="max_price" value="{{ request('max_price') }}" min="0" placeholder="Tanpa Batas" class="w-full text-xs px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+
+                    @if($subcategories->count() > 0)
+                    <div class="flex-1">
+                        <label class="text-xs text-slate-500 font-semibold mb-1 block">Subkategori</label>
+                        <div class="flex flex-wrap gap-x-4 gap-y-2">
+                            @foreach($subcategories as $subcategory)
+                                <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs font-semibold text-slate-600 hover:text-emerald-700 transition">
+                                    <input type="checkbox" name="subcategory[]" value="{{ $subcategory->slug }}"
+                                           {{ in_array($subcategory->slug, (array) request('subcategory', [])) ? 'checked' : '' }}
+                                           class="w-4 h-4 rounded accent-emerald-600">
+                                    {{ $subcategory->name }}
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button type="submit" class="w-full lg:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition">
+                            TERAPKAN
+                        </button>
+                        @if(request('min_price') || request('max_price') || request('subcategory'))
+                            <a href="{{ route('kategori.tumbuhan', ['tag' => request('tag')]) }}"
+                               class="w-full lg:w-auto text-center border border-slate-200 text-slate-500 hover:text-slate-700 font-bold text-xs px-4 py-2.5 rounded-xl transition">
+                                Reset
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </form>
+
             @if($products->count() > 0)
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
                     @foreach($products as $product)

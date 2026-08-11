@@ -40,6 +40,22 @@
             </div>
 
             <div>
+                <label class="block text-gray-700 text-sm font-semibold mb-2">Subkategori</label>
+                <select name="subcategory_id" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <option value="">-- Tidak Ada / Lainnya --</option>
+                    @foreach($subcategories->groupBy(fn($s) => $s->category->name) as $groupName => $group)
+                        <optgroup label="{{ $groupName }}">
+                            @foreach($group as $subcategory)
+                                <option value="{{ $subcategory->id }}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                    {{ $subcategory->name }}
+                                </option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
                 <label class="block text-gray-700 text-sm font-semibold mb-2">Harga (Rp)</label>
                 <input type="number" name="price" value="{{ old('price') }}" placeholder="Contoh: 35000" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
             </div>
