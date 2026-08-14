@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans flex flex-col h-screen">
@@ -45,13 +46,39 @@
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     Mengelola Artikel
                 </a>
-                <a href="{{ url('admin/products') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl {{ Request::is('admin/products*') ? 'bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100' : 'text-gray-600 hover:bg-gray-50 font-medium border border-transparent' }} text-sm transition">
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                    Mengelola Produk
-                </a>
-                <a href="{{ url('admin/owner-profile') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl {{ Request::is('admin/owner-profile*') ? 'bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100' : 'text-gray-600 hover:bg-gray-50 font-medium border border-transparent' }} text-sm transition">
-                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                    Profil Pemilik
+                <div x-data="{ open: {{ Request::is('admin/products*') ? 'true' : 'false' }} }" class="space-y-1">
+                    <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl {{ Request::is('admin/products*') ? 'bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100' : 'text-gray-600 hover:bg-gray-50 font-medium border border-transparent' }} text-sm transition focus:outline-none">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                            <span>Mengelola Produk</span>
+                        </div>
+                        <svg :class="{'rotate-180': open}" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+
+                    <!-- Submenu Ikan & Tumbuhan -->
+                    <div x-show="open" 
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        style="display: none;" 
+                        class="pl-11 pr-2 space-y-1 mt-1">
+                        
+                        <a href="{{ url('admin/products/ikan') }}" class="block px-3 py-2 text-sm rounded-lg transition-colors {{ Request::is('admin/products/ikan*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50 font-medium' }}">
+                            Ikan Cupang
+                        </a>
+                        
+                        <a href="{{ url('admin/products/tumbuhan') }}" class="block px-3 py-2 text-sm rounded-lg transition-colors {{ Request::is('admin/products/tumbuhan*') ? 'text-emerald-700 bg-emerald-50 font-semibold' : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50 font-medium' }}">
+                            Tumbuhan
+                        </a>
+                    </div>
+                </div>
+                <a href="{{ route('teams.index') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl {{ Request::is('admin/teams*') ? 'bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100' : 'text-gray-600 hover:bg-gray-50 font-medium border border-transparent' }} text-sm transition">
+                    <!-- Ikon User Group -->
+                    <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Kelola Tim
                 </a>
                 <a href="{{ url('admin/reviews') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl {{ Request::is('admin/reviews*') ? 'bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100' : 'text-gray-600 hover:bg-gray-50 font-medium border border-transparent' }} text-sm transition">
                     <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>

@@ -18,13 +18,41 @@
     <meta property="og:description" content="{{ $article->meta_description ?: Str::limit(strip_tags($article->content), 150) }}">
     <meta property="og:image" content="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script defer src="{{ asset('js/animate.js') }}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ url()->current() }}"
+        },
+        "headline": "{{ $article->meta_title ?: $article->title }}",
+        "description": "{{ $article->meta_description ?: Str::limit(strip_tags($article->content), 150) }}",
+        "image": "{{ asset('uploads/thumbnails/'.$article->thumbnail) }}",  
+        "author": {
+            "@type": "Organization",
+            "name": "Zaydun Store",
+            "url": "{{ url('/') }}"
+        },  
+        "publisher": {
+            "@type": "Organization",
+            "name": "Zaydun",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "{{ asset('logo.png') }}" 
+            }
+        },
+        "datePublished": "{{ $article->created_at->toIso8601String() }}",
+        "dateModified": "{{ $article->updated_at->toIso8601String() }}"
+        }
+    </script>
 </head>
 <body class="bg-slate-50 text-gray-800 font-sans flex flex-col min-h-screen justify-between">
 
@@ -71,8 +99,8 @@
                 <img decoding="async" src="{{ asset('uploads/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="w-full max-h-[450px] object-cover">
             </div>
 
-            <div class="text-slate-700 leading-relaxed space-y-4 text-base md:text-lg whitespace-pre-line">
-                {!! nl2br(e($article->content)) !!}
+            <div class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-a:text-teal-600 prose-img:rounded-xl">
+                {!! $article->content !!}
             </div>
 
             <div class="mt-10 pt-6 border-t border-slate-200">
