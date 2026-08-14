@@ -18,7 +18,8 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <!-- Form Action Diperbarui -->
+    <form action="{{ url('admin/products/'.$category_slug.'/'.$product->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PUT')
 
@@ -32,9 +33,9 @@
                 <label class="block text-gray-700 text-sm font-semibold mb-2">Kategori Produk</label>
                 <select name="category_id" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" required>
                     <option value="">-- Pilih Kategori --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ old('category_id', $product->category_id) == $cat->id ? 'selected' : '' }}>
+                            {{ $cat->name }}
                         </option>
                     @endforeach
                 </select>
@@ -92,7 +93,8 @@
         </div>
 
         <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100">
-            <a href="{{ url('admin/products') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-5 py-2.5 rounded-xl text-sm transition">
+            <!-- URL Batal Diperbarui -->
+            <a href="{{ url('admin/products/'.$category_slug) }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-5 py-2.5 rounded-xl text-sm transition">
                 Batal
             </a>
             <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow-sm">

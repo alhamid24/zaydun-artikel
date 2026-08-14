@@ -4,10 +4,12 @@
 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Mengelola Produk</h1>
+            <!-- Judul Dinamis -->
+            <h1 class="text-2xl font-bold text-gray-900">Mengelola Produk {{ ucfirst($category_slug) }}</h1>
             <p class="text-sm text-gray-500">Daftar barang yang dijual dan dihubungkan ke WhatsApp.</p>
         </div>
-        <a href="{{ url('admin/products/create') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition">
+        <!-- Link Tambah Diperbarui -->
+        <a href="{{ url('admin/products/'.$category_slug.'/create') }}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition">
             + Tambah Produk Baru
         </a>
     </div>
@@ -56,7 +58,8 @@
                     <td class="p-4 text-gray-600">{{ $product->whatsapp_number }}</td>
                     <td class="p-4">
                         <div class="flex flex-col items-end gap-2">
-                            <form action="{{ route('products.updateStock', $product->id) }}" method="POST" class="flex items-center gap-2">
+                            <!-- Form Stok Diperbarui -->
+                            <form action="{{ url('admin/products/'.$category_slug.'/'.$product->id.'/stock') }}" method="POST" class="flex items-center gap-2">
                                 @csrf
                                 @method('PATCH')
                                 <input type="number" name="stock" min="0" value="{{ $product->stock }}"
@@ -64,11 +67,13 @@
                                 <button class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-600 hover:text-white transition whitespace-nowrap">Simpan Stok</button>
                             </form>
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('admin.products.edit', $product->id) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-600 hover:text-white transition">
+                                <!-- URL Edit Diperbarui -->
+                                <a href="{{ url('admin/products/'.$category_slug.'/'.$product->id.'/edit') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-600 hover:text-white transition">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                     Edit
                                 </a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus produk ini?')">
+                                <!-- Form Hapus Diperbarui -->
+                                <form action="{{ url('admin/products/'.$category_slug.'/'.$product->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus produk ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-50 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white transition">
@@ -88,7 +93,8 @@
                                 <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                             </div>
                             <p class="text-gray-400 text-sm font-medium">Belum ada produk.</p>
-                            <a href="{{ url('admin/products/create') }}" class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold mt-1">+ Tambah Produk Baru</a>
+                            <!-- URL Tambah Empty State Diperbarui -->
+                            <a href="{{ url('admin/products/'.$category_slug.'/create') }}" class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold mt-1">+ Tambah Produk Baru</a>
                         </div>
                     </td>
                 </tr>

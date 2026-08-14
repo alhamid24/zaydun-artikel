@@ -29,7 +29,7 @@
                         <div class="text-slate-600 leading-relaxed whitespace-pre-line">{{ $owner->bio }}</div>
                     @endif
                     <div class="pt-2">
-                        <a href="https://wa.me/6281234567890?text=Halo%20{{ urlencode($owner->name) }},%20saya%20ingin%20bertanya%20seputar%20Zaydun" target="_blank" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow-sm">
+                        <a href="https://wa.me/{{ default_wa_number() }}?text=Halo%20{{ urlencode($owner->name) }},%20saya%20ingin%20bertanya%20seputar%20Zaydun" target="_blank" class="z-btn inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow-sm">
                             <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Chat dengan {{ $owner->name }}
                         </a>
                     </div>

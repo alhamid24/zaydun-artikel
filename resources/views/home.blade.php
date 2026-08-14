@@ -49,7 +49,7 @@
 
         <!-- ================= SEKSI 1: IKAN CUPANG ================= -->
         <section id="ikan-cupang" class="pt-8">
-            <div class="flex items-center gap-3 mb-8 reveal">
+            <div class="flex flex-col items-center text-center gap-3 mb-8 reveal">
                 <div class="w-12 h-12 bg-cyan-100 rounded-2xl flex items-center justify-center">
                     <x-icon name="fish" class="w-6 h-6 text-cyan-500" />
                 </div>
@@ -73,6 +73,7 @@
                         @foreach($bestSellerFish as $product)
                             <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
                                 <span class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Best Seller</span>
+                                <x-stock-badge :product="$product" />
                                 <a href="{{ route('products.show', $product->slug) }}">
                                     <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
                                         <img loading="lazy" decoding="async" src="{{ asset('uploads/products/'.$product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -148,7 +149,7 @@
 
         <!-- ================= SEKSI 2: TUMBUH-TUMBUHAN ================= -->
         <section id="tumbuhan" class="pt-8 border-t border-slate-200">
-            <div class="flex items-center gap-3 mb-8 reveal">
+            <div class="flex flex-col items-center text-center gap-3 mb-8 reveal">
                 <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center">
                     <x-icon name="sprout" class="w-6 h-6 text-emerald-500" />
                 </div>
@@ -172,6 +173,7 @@
                         @foreach($bestSellerPlant as $product)
                             <div class="min-w-[250px] z-card relative bg-white rounded-2xl border border-amber-200 overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all duration-300 group">
                                 <span class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Best Seller</span>
+                                <x-stock-badge :product="$product" />
                                 <a href="{{ route('products.show', $product->slug) }}">
                                     <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
                                         <img loading="lazy" decoding="async" src="{{ asset('uploads/products/'.$product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -258,7 +260,7 @@
                     <p class="text-emerald-100 text-sm md:text-base mb-6 max-w-xl mx-auto">
                         Tim Zaydun siap membantu Anda memilih produk atau memberikan tips perawatan terbaik.
                     </p>
-                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition active:scale-95">
+                    <a href="https://wa.me/{{ default_wa_number() }}" target="_blank" rel="noopener noreferrer" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition active:scale-95">
                         <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Pesan via WhatsApp →
                     </a>
                 </div>

@@ -40,6 +40,12 @@
         </div>
 
         <div>
+            <label class="block text-gray-700 text-sm font-semibold mb-2">No. WhatsApp</label>
+            <input type="text" name="whatsapp" value="{{ old('whatsapp', $profile->whatsapp) }}" placeholder="Contoh: 6281234567890" class="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <p class="text-xs text-gray-400 mt-1">Format internasional tanpa spasi/karakter (62...). Nomor ini dipakai di tombol WhatsApp seluruh halaman publik.</p>
+        </div>
+
+        <div>
             <label class="block text-gray-700 text-sm font-semibold mb-2">Foto Pemilik</label>
             @if($profile->photo)
                 <div class="mb-3">

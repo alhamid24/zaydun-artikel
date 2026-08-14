@@ -13,5 +13,6 @@ class OwnerProfile extends Model
         'title',
         'photo',
         'bio',
+        'whatsapp',
     ];
 }

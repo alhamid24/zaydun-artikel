@@ -12,7 +12,7 @@
                 <div class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4"><x-icon name="wa" class="w-8 h-8 text-emerald-600" /></div>
                 <h3 class="font-bold text-slate-800 text-lg mb-2">WhatsApp</h3>
                 <p class="text-sm text-slate-500 mb-4">Chat langsung dengan admin kami untuk pertanyaan seputar produk atau artikel.</p>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya" target="_blank" class="z-btn inline-block bg-emerald-500 text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-emerald-600 transition shadow-sm">
+                <a href="https://wa.me/{{ default_wa_number() }}?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya" target="_blank" class="z-btn inline-block bg-emerald-500 text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-emerald-600 transition shadow-sm">
                     Hubungi via WhatsApp
                 </a>
             </div>

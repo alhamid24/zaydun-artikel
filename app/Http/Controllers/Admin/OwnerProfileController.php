@@ -21,6 +21,7 @@ class OwnerProfileController extends Controller
             'title' => 'nullable|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'bio' => 'nullable',
+            'whatsapp' => 'nullable|regex:/^[0-9+]{8,16}$/',
         ]);
 
         $profile = OwnerProfile::first();
@@ -31,6 +32,7 @@ class OwnerProfileController extends Controller
         $profile->name = $request->name;
         $profile->title = $request->title;
         $profile->bio = $request->bio;
+        $profile->whatsapp = $request->whatsapp ? preg_replace('/[^0-9]/', '', $request->whatsapp) : null;
 
         if ($request->hasFile('photo')) {
             if ($profile->photo && file_exists(public_path('uploads/owner/' . $profile->photo))) {

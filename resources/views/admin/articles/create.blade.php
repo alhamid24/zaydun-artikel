@@ -244,4 +244,20 @@ document.getElementById('article_content').addEventListener('input', autoFillSeo
 
 autoFillSeo();
 </script>
+
+<!-- INTEGRASI TINYMCE RICH TEXT EDITOR -->
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#article_content',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+            autoFillSeo(); // Memanggil fungsi autoFillSeo Anda saat konten berubah
+        });
+    }
+  });
+</script>
 @endsection

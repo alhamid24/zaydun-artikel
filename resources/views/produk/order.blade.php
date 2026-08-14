@@ -41,7 +41,8 @@
 
         @php $isIkan = $product->category->slug === 'ikan-cupang'; @endphp
         @php $themeColor = $isIkan ? 'cyan' : 'emerald'; @endphp
-        @php $waNumber = $product->whatsapp_number ?? '6281234567890'; @endphp
+        @php $waNumber = $product->whatsapp_number ?? default_wa_number(); @endphp
+        @php $stockMax = $product->stock > 0 ? min($product->stock, 99) : 0; @endphp
 
         <!-- FORM PEMESANAN -->
         <section class="max-w-3xl mx-auto px-4 mt-6 mb-12 reveal">
@@ -53,8 +54,18 @@
                     <div class="flex-1 min-w-0">
                         <h1 class="font-bold text-slate-800">Pesan: {{ $product->name }}</h1>
                         <p class="text-lg font-black {{ $isIkan ? 'text-cyan-600' : 'text-emerald-600' }}">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                        @if($product->stock > 0)
+                            <p class="text-xs font-semibold {{ $product->stock <= 5 ? 'text-amber-600' : 'text-emerald-600' }} mt-0.5">Stok tersedia: {{ $product->stock }}</p>
+                        @endif
                     </div>
                 </div>
+
+                @if($product->stock <= 0)
+                    <div class="flex items-center gap-3 bg-red-50 border border-red-200 text-red-600 text-sm font-semibold rounded-2xl px-4 py-3.5 m-6">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0"></span>
+                        Stok habis — produk ini sedang tidak dapat dipesan.
+                    </div>
+                @endif
 
                 <div class="p-6 md:p-8 space-y-6">
 
@@ -63,9 +74,13 @@
                         <label class="block text-gray-700 text-sm font-semibold mb-2">Jumlah</label>
                         <div class="flex items-center gap-3">
                             <button type="button" onclick="ubahJumlah(-1)" class="w-10 h-10 rounded-xl border border-gray-300 flex items-center justify-center font-bold text-lg hover:bg-gray-100 transition">−</button>
-                            <input type="number" id="jumlah" value="1" min="1" max="99" class="w-20 text-center px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-{{ $themeColor }}-500 font-bold text-lg">
+                            <input type="number" id="jumlah" value="1" min="1" max="{{ $stockMax ?: 1 }}" class="w-20 text-center px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-{{ $themeColor }}-500 font-bold text-lg">
                             <button type="button" onclick="ubahJumlah(1)" class="w-10 h-10 rounded-xl border border-gray-300 flex items-center justify-center font-bold text-lg hover:bg-gray-100 transition">+</button>
-                            <span class="text-xs text-slate-400 ml-2">Maks. 99</span>
+                            @if($stockMax < 99)
+                                <span class="text-xs text-slate-400 ml-2">Stok tersedia: {{ $product->stock }}</span>
+                            @else
+                                <span class="text-xs text-slate-400 ml-2">Maks. 99</span>
+                            @endif
                         </div>
                     </div>
 
@@ -106,9 +121,15 @@
 
                     <!-- Tombol Kirim -->
                     <div class="pt-4">
-                        <button onclick="kirimPesan()" class="z-btn w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-4 rounded-xl transition shadow-sm flex items-center justify-center gap-2">
-                            <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Kirim Pesan ke WhatsApp
-                        </button>
+                        @if($product->stock > 0)
+                            <button onclick="kirimPesan()" class="z-btn w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm px-8 py-4 rounded-xl transition shadow-sm flex items-center justify-center gap-2">
+                                <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Kirim Pesan ke WhatsApp
+                            </button>
+                        @else
+                            <button type="button" disabled class="z-btn w-full bg-slate-200 text-slate-400 font-bold text-sm px-8 py-4 rounded-xl flex items-center justify-center gap-2 cursor-not-allowed">
+                                <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Stok Habis
+                            </button>
+                        @endif
                         <p class="text-xs text-slate-400 text-center mt-2">Data tidak disimpan, langsung dikirim via WhatsApp</p>
                     </div>
 
@@ -144,7 +165,7 @@
                     <h4 class="font-bold text-white mb-3 text-sm uppercase tracking-wider">Hubungi Kami</h4>
                     <p class="text-xs text-slate-500 mb-4">Punya pertanyaan seputar hobi? Chat admin kami langsung via WhatsApp.</p>
                     <div class="flex gap-4">
-                        <a href="https://wa.me/6281234567890" target="_blank" class="z-social text-slate-500 hover:text-white transition" title="WhatsApp">
+                        <a href="https://wa.me/{{ default_wa_number() }}" target="_blank" class="z-social text-slate-500 hover:text-white transition" title="WhatsApp">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </a>
                         <a href="#" target="_blank" class="z-social text-slate-500 hover:text-white transition" title="Instagram">
@@ -167,13 +188,15 @@
 
     <script>
         const jumlahInput = document.getElementById('jumlah');
+        const STOK_MAX = {{ $stockMax ?: 1 }};
         function ubahJumlah(delta) {
             let val = parseInt(jumlahInput.value) || 1;
-            val = Math.max(1, Math.min(99, val + delta));
+            val = Math.max(1, Math.min(STOK_MAX, val + delta));
             jumlahInput.value = val;
         }
 
         function kirimPesan() {
+            if (STOK_MAX <= 0) return alert('Maaf, stok produk sedang habis');
             const nama = document.getElementById('nama').value.trim();
             const nowa = document.getElementById('nowa').value.trim();
             const alamat = document.getElementById('alamat').value.trim();

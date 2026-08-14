@@ -13,13 +13,29 @@ class KategoriController extends Controller
 {
     public function ikan(Request $request)
     {
+        $tag = request('tag');
         $sort = $request->get('sort', 'terbaru');
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
         $selectedSubcategories = (array) $request->input('subcategory', []);
 
+        $articles = Article::with('category')
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'ikan-cupang');
+            })
+            ->where('is_published', true)
+            ->when($tag, function ($q) use ($tag) {
+                $q->where('tag', $tag);
+            })
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
         $productsQuery = Product::with(['category', 'subcategory', 'reviews'])
-            ->withAvg('reviews', 'rating');
+            ->withAvg('reviews', 'rating')
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'ikan-cupang');
+            });
 
         if ($request->filled('min_price')) {
             $min = (int) str_replace(['.', ','], '', $request->min_price);
@@ -59,8 +75,10 @@ class KategoriController extends Controller
             $q->where('slug', 'ikan-cupang');
         })->withCount('products')->get();
 
+        $admins = CategoryAdmin::where('category', 'ikan')->latest()->get();
+
         return view('kategori.ikan', compact(
-            'products', 'totalProducts', 'subcategories',
+            'products', 'totalProducts', 'subcategories', 'admins', 'articles', 'tag',
             'minPrice', 'maxPrice', 'selectedSubcategories', 'sort'
         ));
     }
@@ -68,6 +86,7 @@ class KategoriController extends Controller
     public function tumbuhan(Request $request)
     {
         $tag = request('tag');
+        $sort = $request->get('sort', 'terbaru');
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
         $selectedSubcategories = (array) $request->input('subcategory', []);
@@ -76,6 +95,7 @@ class KategoriController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
             })
+            ->where('is_published', true)
             ->when($tag, function ($q) use ($tag) {
                 $q->where('tag', $tag);
             })
@@ -83,7 +103,8 @@ class KategoriController extends Controller
             ->paginate(9)
             ->withQueryString();
 
-        $productsQuery = Product::with(['category', 'subcategory'])
+        $productsQuery = Product::with(['category', 'subcategory', 'reviews'])
+            ->withAvg('reviews', 'rating')
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
             });
@@ -104,19 +125,23 @@ class KategoriController extends Controller
             });
         }
 
-        $products = $productsQuery->latest()->paginate(9)->withQueryString();
+        switch ($sort) {
+            case 'termurah':
+                $productsQuery->orderBy('price', 'asc');
+                break;
+            case 'termahal':
+                $productsQuery->orderBy('price', 'desc');
+                break;
+            case 'best-seller':
+                $productsQuery->orderByDesc('reviews_avg_rating');
+                break;
+            default:
+                $productsQuery->latest();
+                break;
+        }
 
-        $totalArticles = Article::whereHas('category', function ($q) {
-            $q->where('slug', 'like', '%tumbuhan%');
-        })->count();
-
-        $totalProducts = Product::whereHas('category', function ($q) {
-            $q->where('slug', 'like', '%tumbuhan%');
-        })->count();
-
-        $avgReadingTime = round(Article::whereHas('category', function ($q) {
-            $q->where('slug', 'like', '%tumbuhan%');
-        })->avg('reading_time') ?? 0);
+        $products = $productsQuery->paginate(9)->withQueryString();
+        $totalProducts = $products->total();
 
         $admins = CategoryAdmin::where('category', 'tumbuhan')->latest()->get();
 
@@ -125,8 +150,7 @@ class KategoriController extends Controller
         })->withCount('products')->get();
 
         return view('kategori.tumbuhan', compact(
-            'articles', 'products',
-            'totalArticles', 'totalProducts', 'avgReadingTime', 'admins', 'tag',
+            'articles', 'products', 'totalProducts', 'admins', 'tag', 'sort',
             'minPrice', 'maxPrice', 'selectedSubcategories', 'subcategories'
         ));
     }

@@ -37,6 +37,7 @@
                             @if(in_array($product->id, $topIds))
                                 <span class="absolute top-3 left-3 z-10 bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow inline-flex items-center gap-1"><x-icon name="star" class="w-3 h-3" /> Best Seller</span>
                             @endif
+                            <x-stock-badge :product="$product" />
                             <a href="{{ route('products.show', $product->slug) }}">
                                 <div class="aspect-[4/3] bg-slate-100 overflow-hidden">
                                     <img loading="lazy" decoding="async" src="{{ asset('uploads/products/'.$product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -83,7 +84,7 @@
                     <p class="text-emerald-100 text-sm md:text-base mb-6 max-w-xl mx-auto">
                         Tim Zaydun siap membantu Anda memilih produk yang paling cocok untuk tumbuhan Anda.
                     </p>
-                    <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Tumbuhan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition active:scale-95">
+                    <a href="https://wa.me/{{ default_wa_number() }}?text=Halo%20Admin%20Zaydun,%20saya%20ingin%20bertanya%20seputar%20produk%20Tumbuhan" target="_blank" class="z-btn inline-flex items-center gap-2 bg-white text-emerald-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-emerald-50 shadow-lg transition active:scale-95">
                         <x-icon name="wa" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Chat Admin via WhatsApp →
                     </a>
                 </div>

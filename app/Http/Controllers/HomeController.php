@@ -15,6 +15,7 @@ class HomeController extends Controller
             ->whereHas('category', function($q) {
                 $q->where('slug', 'ikan-cupang');
             })
+            ->where('is_published', true)
             ->latest()
             ->take(3)
             ->get();
@@ -24,6 +25,7 @@ class HomeController extends Controller
             ->whereHas('category', function($q) {
                 $q->where('slug', 'like', '%tumbuhan%');
             })
+            ->where('is_published', true)
             ->latest()
             ->take(3)
             ->get();

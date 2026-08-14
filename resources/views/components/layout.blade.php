@@ -646,10 +646,10 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a href="/ikan-cupang" class="bg-white text-teal-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition">
+                    <a href="{{ route('kategori.ikan') }}" class="bg-white text-teal-700 font-bold text-sm px-7 py-3 rounded-full hover:bg-cyan-50 shadow-lg transition">
                         <x-icon name="fish" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Ikan Cupang
                     </a>
-                    <a href="/tumbuhan" class="bg-white/15 backdrop-blur-sm text-white font-bold text-sm px-7 py-3 rounded-full border border-white/30 hover:bg-white/25 transition">
+                    <a href="{{ route('kategori.tumbuhan') }}" class="bg-white/15 backdrop-blur-sm text-white font-bold text-sm px-7 py-3 rounded-full border border-white/30 hover:bg-white/25 transition">
                         <x-icon name="sprout" class="w-4 h-4 inline-block -mt-0.5 align-middle" /> Tumbuhan
                     </a>
                 </div>
